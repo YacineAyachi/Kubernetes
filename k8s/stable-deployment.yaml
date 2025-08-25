@@ -1,0 +1,20 @@
+# stable deployment (90% of traffic)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlops-server-stable
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: mlops-server
+      version: stable  # This should match the labels defined in the template
+  template:
+    metadata:
+      labels:
+        app: mlops-server
+        version: stable
+    spec:
+      containers:
+      - name: mlops-server
+        image: mlops-server:0.1.0
